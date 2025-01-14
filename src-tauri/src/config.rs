@@ -1,7 +1,9 @@
 
 use std::usize;
 use chrono::prelude::*;
-#[derive(Default)]
+use serde::{Serialize, Deserialize};
+
+#[derive(Serialize, Deserialize, Default)]
 pub struct Config {
     pub NX:usize,
     pub NV:usize,

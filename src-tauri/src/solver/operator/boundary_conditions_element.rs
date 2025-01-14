@@ -1,4 +1,4 @@
-use super::Element;
+use crate::Element;
 
 impl Element {
     pub fn boundary_conditions(&self, l:&str,ix:usize,iv:usize) -> f64 {

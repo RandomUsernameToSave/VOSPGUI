@@ -1,10 +1,12 @@
 pub mod element;
+pub mod operator;
 mod fields;
+
 use element::{Element,Shareable_element};
 use crate::config::Config;
 use crate::n_save;
 use tauri::{AppHandle, Emitter};
-
+use operator::{ListOperators,Operator};
 
 use std::{fs, vec};
 use std::path::Path;
@@ -17,6 +19,7 @@ pub struct Solver {
     electric_field:fields::Field,
     potentiel_field:fields::Field,
     pub config: Config,
+    list_operators : ListOperators,
 }
 
 
@@ -33,8 +36,8 @@ impl Solver {
         //let file = File::create("VOSP.h5").unwrap();
         let electric_field  = fields::Field::new(String::from("electric field"),config.clone());
         let potentiel_field  = fields::Field::new(String::from("potential field"),config.clone());
-
-        Solver{elements:elements,electric_field:electric_field,potentiel_field,config:config}
+        let list_operators = ListOperators::new();
+        Solver{elements:elements,electric_field:electric_field,potentiel_field,config:config,list_operators:list_operators}
     }
 
     pub fn set_config(&mut self,config:Config) {
@@ -55,6 +58,10 @@ impl Solver {
             element.init(); // on initalize tous les champs de vecteurs des elements
 
         }
+        // Add operators to the init 
+
+        self.list_operators.add_operator(operator::x_advection);
+
     }
 
 
@@ -69,21 +76,20 @@ impl Solver {
     }
 
     pub fn next_step(&mut self) {
-        for element in self.elements.iter_mut() {
-            element.x_advection(self.config.DT/2.);
-        }
+        
 
+        self.list_operators.execute( &mut self.elements,self.config.DT/2.);
+
+
+        // Calculate the advection in velocity space
         let charge_density = self.calculate_charge_density();
         self.potentiel_field.solve_potential(charge_density);
         self.potentiel_field.gradient(&mut self.electric_field);
 
         for element in self.elements.iter_mut() {
-            element.v_advection(self.config.DT, &self.electric_field.field_values);
+            operator::v_advection( element,self.config.DT, &self.electric_field.field_values);
         }
 
-        for element in self.elements.iter_mut() {
-            element.x_advection(self.config.DT/2.);
-        }
     }
 
     pub fn run(&mut self, app: AppHandle) {

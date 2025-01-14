@@ -1,5 +1,4 @@
 mod initialize;
-mod operator;
 mod moments_calculation;
 use std::{fmt::format, ptr::null};
 
@@ -9,16 +8,17 @@ use hdf5::{File, Group};
 use ndarray::Array2;
 use serde::{Serialize, Deserialize};
 
+#[derive(serde::Serialize)]
 pub struct Element {
     element_name:String,
-    element_grid:Vec<Vec<f64>>,
-    lv:f64,
-    dv:f64,
+    pub element_grid:Vec<Vec<f64>>,
+    pub lv:f64,
+    pub dv:f64,
     pub z_charge:i32,
     pub mu:f64,
     init_cond:u32,
-    lx_boundary:u32,
-    ux_boundary:u32,
+    pub lx_boundary:u32,
+    pub ux_boundary:u32,
     pub config:Config
 }
 

@@ -13,14 +13,19 @@ A solver of the Vlasov-Equation is therefore computationally expensive. Moreover
 ### Operator splitting
 
 The operator splitting (or "time splitting" in plasma physics) is a numerical method that transform the equation into simpler problem to solve. 
-
+With operator splitting, one will solve first advection along space axis, then advection along velocity axis, and finally collisions. All those steps represents therefore one time step. This operator splitting comes with a cost of a time discretization error in $O(\Delta t ^2)$ (higher order schemes also exist). 
 ```mermaid
 graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
+    Vlasov_operator --> |time step| Next_step
+    x_advection --> |time step| Collisions
+    x_advection -->Poisson_equation;
+    Poisson_equation-->v_advection;
+    v_advection --> Collisions
+
 ```
+Operator splitting will be useful when adding different types of collisions and to gain more flexibility for the solver.
+
+
 
 ### Semi-Lagrangian
 

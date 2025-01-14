@@ -6,7 +6,7 @@ use super::Element;
 impl Element {
     pub fn initialize_grid(&mut self) {
         
-        if self.init_cond == 0 {
+        if self.init_cond == "zero" {
             for i in 0..self.config.NX {
                 for j in 0..self.config.NV {
                     self.element_grid[i][j] = 0.;
@@ -14,7 +14,7 @@ impl Element {
             }
         }
 
-        if self.init_cond == 1 {
+        else if self.init_cond == "maxwellian" {
             let mut v:f64; 
             for ix in 0..self.config.NX {
                 for iv in 0..self.config.NV {
@@ -23,7 +23,7 @@ impl Element {
                 }
             }
         }
-        if self.init_cond == 2 {
+        else if self.init_cond == "half-maxwellian" {
             let mut v:f64; 
             for ix in 0..self.config.NX {
                 for iv in 0..self.config.NV {

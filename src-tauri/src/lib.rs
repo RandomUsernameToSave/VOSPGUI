@@ -26,8 +26,8 @@ pub const epsi:f64 = 1.0e-20;
 pub const T:f64 = 0.01;
 pub const lambda:f64=0.01;
 
-pub const field_bc_left:u32=0;
-pub const field_bc_right:u32=1;
+pub const field_bc_left:String=String::new();
+pub const field_bc_right:String=String::new();
 pub const n_save:u32 = 200;
 
 
@@ -60,7 +60,7 @@ fn my_testcommand() {
 }
 
 #[tauri::command]
-fn new_element(state: State<'_, Mutex<Solver>>,element_name:String,lv:f64, init_cond:u32,z_charge:i32,mu:f64,right_boundary:u32,left_boundary:u32) {
+fn new_element(state: State<'_, Mutex<Solver>>,element_name:String,lv:f64, init_cond:String,z_charge:i32,mu:f64,right_boundary:String,left_boundary:String) {
     let mut solver = state.lock().unwrap(); 
 
     let element = Element::new(element_name,lv,init_cond,z_charge,mu,left_boundary,right_boundary,solver.config.clone());

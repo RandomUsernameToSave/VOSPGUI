@@ -8,7 +8,7 @@ use tauri::State;
 use std::fs;
 
 #[tauri::command]
-pub fn addConfig(state: State<'_, Mutex<Solver>> , NX:usize,NV:usize,LX:f64,DT:f64,end_time:f64,lambda:f64,field_bc_left:u32,field_bc_right:u32,n_save:u32 ) {
+pub fn addConfig(state: State<'_, Mutex<Solver>> , NX:usize,NV:usize,LX:f64,DT:f64,end_time:f64,lambda:f64,field_bc_left:String,field_bc_right:String,n_save:u32 ) {
     let mut solver = state.lock().unwrap(); 
     let epsi = 1.0e-20;
     let config = Config::new(NX, NV, LX, DT, end_time, epsi, lambda, field_bc_left, field_bc_right, n_save);

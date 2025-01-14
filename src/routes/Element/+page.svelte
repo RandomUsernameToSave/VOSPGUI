@@ -33,9 +33,9 @@ let Z_charge = 0;
 let element_name = "electron";
 let lv = 5. ; 
 let mu = 1. ;
-let init_cond = 0;
-let right_boundary = 0;
-let left_boundary = 0;
+let init_cond = "zero";
+let right_boundary = "";
+let left_boundary = "";
 // Make sure 'z_charge' key exactly matches the parameter in Rust
 $: console.log(init_cond);
 
@@ -86,7 +86,7 @@ function addElement() {
                     <Select.Value placeholder="Select species right boundary condition" />
                   </Select.Trigger>
                   <Select.Content>
-                    <Select.Item value="0">
+                    <Select.Item value="zero">
                       <div class="text-muted-foreground flex items-start gap-3">
                         <Rabbit class="size-5" />
                         <div class="grid gap-0.5">
@@ -98,13 +98,26 @@ function addElement() {
                         </div>
                       </div>
                     </Select.Item>
-                    <Select.Item value="1">
+                    <Select.Item value="neumann">
                       <div class="text-muted-foreground flex items-start gap-3">
                         <Bird class="size-5" />
                         <div class="grid gap-0.5">
                           <p>
                             <span class="text-foreground font-medium">
                               Neumann
+                            </span>
+                          </p>
+      
+                        </div>
+                      </div>
+                    </Select.Item>
+                    <Select.Item value="periodic">
+                      <div class="text-muted-foreground flex items-start gap-3">
+                        <Bird class="size-5" />
+                        <div class="grid gap-0.5">
+                          <p>
+                            <span class="text-foreground font-medium">
+                              Periodic
                             </span>
                           </p>
       
@@ -123,7 +136,7 @@ function addElement() {
                     <Select.Value placeholder="Select species left boundary condition" />
                   </Select.Trigger>
                   <Select.Content>
-                    <Select.Item value="genesis">
+                    <Select.Item value="zero">
                       <div class="text-muted-foreground flex items-start gap-3">
                         <Rabbit class="size-5" />
                         <div class="grid gap-0.5">
@@ -135,13 +148,26 @@ function addElement() {
                         </div>
                       </div>
                     </Select.Item>
-                    <Select.Item value="explorer">
+                    <Select.Item value="neumann">
                       <div class="text-muted-foreground flex items-start gap-3">
                         <Bird class="size-5" />
                         <div class="grid gap-0.5">
                           <p>
                             <span class="text-foreground font-medium">
                               Neumann
+                            </span>
+                          </p>
+      
+                        </div>
+                      </div>
+                    </Select.Item>
+                    <Select.Item value="periodic">
+                      <div class="text-muted-foreground flex items-start gap-3">
+                        <Bird class="size-5" />
+                        <div class="grid gap-0.5">
+                          <p>
+                            <span class="text-foreground font-medium">
+                              Periodic
                             </span>
                           </p>
       
@@ -159,7 +185,7 @@ function addElement() {
                 </Select.Trigger>
               
                 <Select.Content >
-                  <Select.Item value="0">
+                  <Select.Item value="maxwellian">
                     <div class="text-muted-foreground flex items-start gap-3">
                       <Rabbit class="size-5" />
                       <div class="grid gap-0.5">
@@ -170,7 +196,7 @@ function addElement() {
                     </div>
                   </Select.Item>
               
-                  <Select.Item value="1">
+                  <Select.Item value="zero">
                     <div class="text-muted-foreground flex items-start gap-3">
                       <Bird class="size-5" />
                       <div class="grid gap-0.5">
@@ -181,7 +207,7 @@ function addElement() {
                     </div>
                   </Select.Item>
               
-                  <Select.Item value="2">
+                  <Select.Item value="half-maxwellian">
                     <div class="text-muted-foreground flex items-start gap-3">
                       <Bird class="size-5" />
                       <div class="grid gap-0.5">

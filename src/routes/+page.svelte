@@ -36,8 +36,8 @@
   let NV = 100;
   let LX = 1.
   let lambda = 0.01;
-  let potentialRightBoundary = 0;
-  let potentialLeftBoundary = 0;
+  let potentialRightBoundary = "zero";
+  let potentialLeftBoundary = "zero";
   let IsClicked = false;
   let nSave = 100;
   let value = 0;
@@ -91,7 +91,7 @@
               <Select.Value placeholder="Select Potential right boundary condition" />
             </Select.Trigger>
             <Select.Content>
-              <Select.Item value="0">
+              <Select.Item value="zero">
                 <div class="text-muted-foreground flex items-start gap-3">
                   <Rabbit class="size-5" />
                   <div class="grid gap-0.5">
@@ -103,7 +103,7 @@
                   </div>
                 </div>
               </Select.Item>
-              <Select.Item value="1">
+              <Select.Item value="neumann">
                 <div class="text-muted-foreground flex items-start gap-3">
                   <Bird class="size-5" />
                   <div class="grid gap-0.5">
@@ -128,7 +128,7 @@
               <Select.Value placeholder="Select Potential left boundary condition" />
             </Select.Trigger>
             <Select.Content>
-              <Select.Item value="0">
+              <Select.Item value="zero">
                 <div class="text-muted-foreground flex items-start gap-3">
                   <Rabbit class="size-5" />
                   <div class="grid gap-0.5">
@@ -140,7 +140,7 @@
                   </div>
                 </div>
               </Select.Item>
-              <Select.Item value="1">
+              <Select.Item value="neumann">
                 <div class="text-muted-foreground flex items-start gap-3">
                   <Bird class="size-5" />
                   <div class="grid gap-0.5">

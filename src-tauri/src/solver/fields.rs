@@ -12,7 +12,7 @@ pub struct Field {
 impl Field {
     
     pub fn new(name:String,config:Config) -> Field {
-        let field_values = vec![0.;config.NX];
+        let field_values = vec![0.;config.NX+4];
 
 
         Field {name:name, field_values:field_values,config:config}
@@ -30,7 +30,7 @@ impl Field {
             group = file.create_group(&self.name).unwrap();
         }
         //let group: Group = file.create_group(&self.name).unwrap();
-        let dataset = group.new_dataset::<f64>().shape([self.config.NX]).create(t.to_string().as_str()).unwrap();
+        let dataset = group.new_dataset::<f64>().shape([self.config.NX+4]).create(t.to_string().as_str()).unwrap();
     
     
         dataset.write(&self.field_values);
@@ -38,15 +38,17 @@ impl Field {
     }
 
     pub fn gradient(&self, gradient_field:&mut Field ){
-        for ix in 1..self.config.NX-1 {
+        for ix in 3..self.config.NX+1 {
             gradient_field.field_values[ix] = -(self.field_values[ix+1] - self.field_values[ix-1] )*self.config.dxi*0.5;
         }
+        gradient_field.field_values[2] = -(self.field_values[3] - self.field_values[2] )*self.config.dxi;
+        gradient_field.field_values[self.config.NX+2] = -(self.field_values[self.config.NX+2] - self.field_values[self.config.NX+1] )*self.config.dxi;
     }
 
     fn tolerance_limit(&self, forcing_vector:&Vec<f64>) -> f64 {
         let mut tol = 0. ;
         let mut R;
-        for i in 1..self.config.NX-1 {
+        for i in 2..self.config.NX+2 {
             R = 1./12. * (forcing_vector[i+1] - 2.*forcing_vector[i] + forcing_vector[i-1]).abs();
             if R>tol {
                 tol = R;
@@ -60,7 +62,7 @@ impl Field {
 
         let tol = self.tolerance_limit(&forcing_vector);
         let mut R :f64;
-        for i in 1..self.config.NX-1 {
+        for i in 3..self.config.NX+1 {
             R  = (self.field_values[i+1] - 2.* self.field_values[i] + self.field_values[i-1])*self.config.dxi*self.config.dxi - forcing_vector[i];
             R = R.abs();
             if R>tol {
@@ -85,7 +87,7 @@ impl Field {
 
         while !converged {
             self.boundary_conditions();
-            for i in 1..(self.config.NX-1) {
+            for i in 3..(self.config.NX+1) {
                 self.field_values[i] = (1.-w)*self.field_values[i] + w/a * (-forcing_vector[i] + (self.field_values[i-1] + self.field_values[i+1])*self.config.dxi*self.config.dxi) ;
                 
             }

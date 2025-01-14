@@ -82,7 +82,7 @@
         <div class="grid gap-3">
           <Label for="model">Potential Field</Label>
             <Select.Root selected={potentialRightBoundary} onSelectedChange={(v) => {
-                v && (potentialRightBoundary = parseInt(v.value));
+                v && (potentialRightBoundary = v.value);
               }}>
             <Select.Trigger
               id="model"
@@ -119,7 +119,7 @@
             </Select.Content>
           </Select.Root>
           <Select.Root selected={potentialLeftBoundary} onSelectedChange={(v) => {
-            v && (potentialLeftBoundary = parseInt(v.value));
+            v && (potentialLeftBoundary = v.value);
           }}>
             <Select.Trigger
               id="model"

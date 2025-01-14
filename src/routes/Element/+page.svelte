@@ -77,7 +77,7 @@ function addElement() {
               <div class="grid gap-3">
                 <Label for="model">Element</Label>
                 <Select.Root selected={right_boundary} onSelectedChange={(v) => {
-                  v && (right_boundary = parseInt(v.value));
+                  v && (right_boundary = v.value);
                 }}>
                   <Select.Trigger
                     id="model"
@@ -127,7 +127,7 @@ function addElement() {
                   </Select.Content>
                 </Select.Root>
                 <Select.Root selected={left_boundary} onSelectedChange={(v) => {
-                  v && (left_boundary = parseInt(v.value));
+                  v && (left_boundary = v.value);
                 }}>
                   <Select.Trigger
                     id="model"
@@ -178,7 +178,7 @@ function addElement() {
                 </Select.Root>
               </div>
               <Select.Root selected={init_cond} onSelectedChange={(v) => {
-                v && (init_cond = parseInt(v.value));
+                v && (init_cond = v.value);
               }}> <!-- Two-way binding between Select and init_cond -->
                 <Select.Trigger id="model" class="items-start [&_[data-description]]:hidden">
                   <Select.Value placeholder="Select initial boundary condition" />

@@ -24,7 +24,7 @@ pub struct Element {
 
 impl Element {
     pub fn new(element_name:String, lv:f64,init_cond:String,z_charge:i32,mu:f64,lx_boundary:String,ux_boundary:String,config:Config) -> Element {
-        let element_grid = vec![vec![0.;config.NV];config.NX]; 
+        let element_grid = vec![vec![0.;config.NV+4];config.NX+4]; 
         let dv = 2.*lv/config.NV as f64;
 
         
@@ -33,7 +33,7 @@ impl Element {
     }
 
     pub fn init(&mut self) {
-        self.element_grid = vec![vec![0.;self.config.NV];self.config.NX]; 
+        self.element_grid = vec![vec![0.;self.config.NV + 4];self.config.NX+4]; 
         self.initialize_grid();
     }
 
@@ -67,7 +67,7 @@ impl Element {
             group = file.create_group(&self.element_name).unwrap();
         }
         //let group: Group = file.create_group(&self.element_name).unwrap();
-        let dataset = group.new_dataset::<f64>().shape([self.config.NX,self.config.NV]).create(t.to_string().as_str()).unwrap();
+        let dataset = group.new_dataset::<f64>().shape([self.config.NX+4,self.config.NV+4]).create(t.to_string().as_str()).unwrap();
     
         
         //let dataset = group.new_dataset::<f64>().shape([self.config.NX,self.config.NV]).create(t.to_string().as_str()).unwrap();

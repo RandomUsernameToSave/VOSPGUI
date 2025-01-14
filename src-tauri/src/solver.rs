@@ -49,8 +49,8 @@ impl Solver {
     }
 
     pub fn init(&mut self) {
-        self.electric_field.field_values = vec![0.;self.config.NX];
-        self.potentiel_field.field_values = vec![0.;self.config.NX];
+        self.electric_field.field_values = vec![0.;self.config.NX+4];
+        self.potentiel_field.field_values = vec![0.;self.config.NX+4];
         self.electric_field.config = self.config.clone();
         self.potentiel_field.config = self.config.clone();
         for element in self.elements.iter_mut() {
@@ -66,9 +66,9 @@ impl Solver {
 
 
     fn calculate_charge_density(&self) -> Vec<f64> {
-        let mut charge_density = vec![0.;self.config.NX]; 
+        let mut charge_density = vec![0.;self.config.NX+4]; 
         for element in self.elements.iter() {
-            for i in 0..self.config.NX {
+            for i in 0..self.config.NX+4 {
                 charge_density[i] += (element.z_charge as f64) * element.density()[i] / (self.config.lambda*self.config.lambda);
             }
         }

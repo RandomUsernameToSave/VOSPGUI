@@ -9,6 +9,10 @@ use hdf5::{File, Group};
 use tauri::{Builder, Manager,State,AppHandle, Emitter};
 use solver::element::Shareable_element;
 use command::{addConfig,list_all_files,read_h5,read_dataset_h5,select_h5_dataset};
+use std::fs;
+use std::path::Path;
+
+
 
 pub const NX:usize = 256;
 pub const NV:usize = 100;
@@ -25,6 +29,17 @@ pub const lambda:f64=0.01;
 pub const field_bc_left:u32=0;
 pub const field_bc_right:u32=1;
 pub const n_save:u32 = 200;
+
+
+fn ensure_folder_exists() -> std::io::Result<()> {
+    let folder_path = Path::new("./DATA");
+
+    if !folder_path.exists() {
+        // Create the directory if it doesn't exist
+        fs::create_dir_all(folder_path)?;
+    }
+    Ok(())
+}
 
 
 
@@ -77,7 +92,7 @@ pub fn run() {
     tauri::Builder::default().setup(|app| {
 
             app.manage(Mutex::new(Solver::new(config)));
-            
+            ensure_folder_exists();
             Ok(())
 
         })

@@ -4,7 +4,9 @@ This project is a solver of the Vlasov Equation built with rust and Tauri. The f
 
 ## Numerical methods
 The Vlasov equation is an equation used in plasma physics. It is given by the following equation, where "s" denote the species "s". And $\hat C_{s,s'}$ denote the collision operator between species "$s$" and "$s'$".
-$$\partial_t f_s + \vec v \partial_x f_s + \frac{q_s}{m_s} \: \vec E \: \partial_v f_s = \sum_{s'} \hat C_{s,s'} $$
+$$\begin{equation}
+\partial_t f_s + \vec v \partial_x f_s + \frac{q_s}{m_s} \: \vec E \: \partial_v f_s = \sum_{s'} \hat C_{s,s'}
+\end{equation}$$
 
 The space of the solution lies in the phase space ($\vec x , \vec v$) which means that the space of the solution is at least 2 dimensional, and at best 6 dimensional (3 space, 3 velocity). For the moment, the code only works in 1D-1V.
 
@@ -32,6 +34,8 @@ Operator splitting will be useful when adding different types of collisions and 
 Thanks to operator splitting, solving Vlasov-Equation boils down to solving different advection step (respectively $\partial_t f_s = -v \partial_x f_s $, and $\partial_t f_s = -E \partial_v f_s $).
 Semi-Lagrangian method (SL) takes advantage of the explicit solution of the advection equation.
 Indeed, v and E being constants along respectively x and v axis, the solution of those equations take the form given below.
-$$ f_s(x,v,t) = f_s(x-v \Delta t ,v,t - \Delta t)$$ 
+$$\begin{equation}
+f_s(x,v,t) = f_s(x-v \Delta t ,v,t - \Delta t) 
+\end{equation}$$
 Therefore, given a point $(x,v,t)$, the goal is to reconstruct the point at $(x-v \Delta t ,v)$ at previous time step. Different polynomial reconstructions exist, we then chose to use a CWENO-3.2 polynomial reconstruction to prevent Gibbs phenomenom close to discontinuity.
 

@@ -60,7 +60,7 @@ impl Solver {
         }
         // Add operators to the init 
 
-        self.list_operators.add_operator(operator::x_advection);
+        //self.list_operators.add_operator(operator::x_advection);
 
     }
 
@@ -77,9 +77,10 @@ impl Solver {
 
     pub fn next_step(&mut self) {
         
-
-        self.list_operators.execute( &mut self.elements,self.config.DT/2.);
-
+        // Spatial advection
+        for element in self.elements.iter_mut() {
+            operator::x_advection( element,self.config.DT);
+        }
 
         // Calculate the advection in velocity space
         let charge_density = self.calculate_charge_density();
@@ -89,6 +90,10 @@ impl Solver {
         for element in self.elements.iter_mut() {
             operator::v_advection( element,self.config.DT, &self.electric_field.field_values);
         }
+
+        // Collisions operators
+
+        self.list_operators.execute( &mut self.elements,self.config.DT/2.);
 
     }
 

@@ -42,3 +42,10 @@ impl Config {
         println!("NX {}, NV {} , LX {} , DT {} , DX {}",self.NX,self.NV,self.LX,self.DT,self.DX);
     }
 }
+
+#[derive(Serialize, Deserialize, Default)]
+pub struct ConfigCollision{
+    species_name:Vec<String>,
+    pub frequency_collision:f64
+}
+

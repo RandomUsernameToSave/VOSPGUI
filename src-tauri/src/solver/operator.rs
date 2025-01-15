@@ -1,4 +1,7 @@
+use std::f64::consts::PI;
+
 use crate::Element;
+use crate::config::ConfigCollision;
 mod boundary_conditions_element;
 
 
@@ -32,6 +35,24 @@ impl ListOperators {
 }
 
 
+pub fn bgk_collision(element:&mut Element,DT:f64,config_collision:ConfigCollision) {
+    let temperature = element.temperature();
+    let density = element.density();
+    let mut maxwell = 0.;
+    let mut v = 0.;
+    let mut temperature_inter = 0.;
+
+    for ix in 2..element.config.NX+2 {
+        for iv  in 2..element.config.NV+2 {
+            v = -element.lv + ((iv-2) as f64) * element.dv;
+            temperature_inter = temperature[ix]/(density[ix]+1.0e-20);
+            maxwell = 1./(2.*PI*(temperature_inter+1.0e-20)).sqrt() * (-v*v*0.5/(temperature_inter+1.0e-20)).exp();
+            element.element_grid[ix][iv] = config_collision.frequency_collision * (density[ix]*maxwell -element.element_grid[ix][iv]);
+
+        }
+    }
+    
+}
 
 pub fn x_advection(element:&mut Element,DT:f64) {
     

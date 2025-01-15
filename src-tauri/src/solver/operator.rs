@@ -36,6 +36,7 @@ impl ListOperators {
 
 
 pub fn bgk_collision(element:&mut Element,DT:f64,config_collision:ConfigCollision) {
+    
     let temperature = element.temperature();
     let density = element.density();
     let mut maxwell = 0.;
@@ -92,10 +93,10 @@ pub fn x_advection(element:&mut Element,DT:f64) {
             //calc_ind -= 1;
             th = ((v1*DT*element.config.dxi).ceil() as isize) as f64 - v1*DT*element.config.dxi;
 
-            if calc_ind <= 0 {
+            if calc_ind <= 2 {
                 element.element_grid[ix][iv] = element.boundary_conditions("lx",ix,iv);
             }
-            else if calc_ind >= ((element.config.NX-2) as isize) {
+            else if calc_ind >= ((element.config.NX+2) as isize) {
                 element.element_grid[ix][iv] = element.boundary_conditions("ux",ix,iv);
             }
             else {
@@ -199,10 +200,10 @@ pub fn v_advection(element:&mut Element,DT:f64, elec_field: &Vec<f64>) {
             //calc_ind -= 1;
             th = ((v1*DT*element.dv).ceil() as isize) as f64 - v1*DT*element.dv;
 
-            if calc_ind <= 0 {
+            if calc_ind <= 2 {
                 element.element_grid[ix][iv] = element.boundary_conditions("lv",ix,iv);
             }
-            else if calc_ind >= ((element.config.NV-2) as isize) {
+            else if calc_ind >= ((element.config.NV+2) as isize) {
                 element.element_grid[ix][iv] = element.boundary_conditions("uv",ix,iv);
             }
             else {

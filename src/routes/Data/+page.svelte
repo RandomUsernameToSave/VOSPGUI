@@ -104,6 +104,10 @@
       yAxis: {
         data: yData
       },
+      visualMap: {
+        max:Math.max(...chartData.flat())
+      },
+
       series: [
         {
           data: reshapeData(chartData)
@@ -123,7 +127,7 @@
 
   function read_groups() {
     invoke('read_h5', { pathH5: selected_file }).then((data) => {
-      group_list = data;
+      group_list = data.filter((item) => item !== "potential field" && item !== "electric field");
       console.log(data);
     });
   }

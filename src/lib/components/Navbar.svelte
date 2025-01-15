@@ -55,9 +55,12 @@
   
       <Tooltip.Root>
         <Tooltip.Trigger asChild let:builder>
-          <Button variant="ghost" size="icon" class="rounded-lg" aria-label="Documentation" builders={[builder]}>
-            <Book class="size-5" />
-          </Button>
+          
+          <a href="https://randomusernametosave.github.io/VOSP-GUIDE">
+            <Button variant="ghost" size="icon" class="{currentPage === '/Data' ? 'bg-secondary' : ''} rounded-lg" aria-label="Models" builders={[builder]}>
+              <Book class="size-5" />
+            </Button>
+          </a>
         </Tooltip.Trigger>
         <Tooltip.Content side="right" sideOffset={5}>Documentation</Tooltip.Content>
       </Tooltip.Root>

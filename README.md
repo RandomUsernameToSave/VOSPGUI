@@ -1,4 +1,5 @@
-# VOSP
+![plot](./static/VOSP_splash.png)
+
 
 This project is a solver of the Vlasov Equation built with rust and Tauri. The focus during the development was put on the accessibility and the correctness of the code.
 

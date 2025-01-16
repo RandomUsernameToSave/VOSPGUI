@@ -15,5 +15,11 @@ The data window helps you quickly display the results of your solver.
 ![plot](./readme/DATA_example.png)
 
 ## Getting started
-To get started, download the binaries on the "releases" tab in github.
-Install and start VOGUI.
+To get started, download the binaries in the "releases" tab in github in Assets.
+
+For debian based OS : 
+vogui_0.1.0_amd64.deb 
+vogui_0.1.0_amd64.AppImage 
+
+For windows : 
+vogui_0.1.0_x64-setup.exe 

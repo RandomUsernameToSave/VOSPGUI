@@ -201,10 +201,10 @@ pub fn v_advection(element:&mut Element,DT:f64, elec_field: &Vec<f64>) {
             th = ((v1*DT*element.dv).ceil() as isize) as f64 - v1*DT*element.dv;
 
             if calc_ind <= 2 {
-                element.element_grid[ix][iv] = element.boundary_conditions("lv",ix,iv);
+                element.element_grid[ix][iv] = element.element_grid[ix][3] ;//element.boundary_conditions("lv",ix,iv);
             }
             else if calc_ind >= ((element.config.NV+2) as isize) {
-                element.element_grid[ix][iv] = element.boundary_conditions("uv",ix,iv);
+                element.element_grid[ix][iv] = element.element_grid[ix][element.config.NV+1] ;//element.boundary_conditions("uv",ix,iv);
             }
             else {
                 

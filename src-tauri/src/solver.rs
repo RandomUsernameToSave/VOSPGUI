@@ -1,5 +1,6 @@
 pub mod element;
 pub mod operator;
+pub mod reconstruction;
 mod fields;
 
 use element::{Element,Shareable_element};

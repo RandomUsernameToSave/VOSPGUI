@@ -158,8 +158,8 @@
 
     <Card.Root class="w-[350px]">
         <Card.Header>
-          <Card.Title>Create project</Card.Title>
-          <Card.Description>Deploy your new project in one-click.</Card.Description>
+          <Card.Title>Select dataset</Card.Title>
+          <Card.Description>Plot your results.</Card.Description>
         </Card.Header>
         <Card.Content>
         
@@ -171,7 +171,7 @@
             read_groups();
           }}>
             <Select.Trigger class="w-[180px] ">
-            <Select.Value placeholder="Select Element" />
+            <Select.Value placeholder="Select Dataset" />
             </Select.Trigger>
             <Select.Content>
             <Select.Group >
@@ -195,7 +195,7 @@
           read_dataset();
           }}>
             <Select.Trigger class="w-[180px]">
-            <Select.Value placeholder="Select Time" />
+            <Select.Value placeholder="Select Element" />
             </Select.Trigger>
             <Select.Content>
             <Select.Group>

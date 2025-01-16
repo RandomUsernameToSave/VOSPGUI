@@ -53,36 +53,20 @@
         <Tooltip.Content side="right" sideOffset={5}>Data</Tooltip.Content>
       </Tooltip.Root>
   
+
+    </nav>
+  
+    <nav class="mt-auto grid gap-1 p-2">
       <Tooltip.Root>
         <Tooltip.Trigger asChild let:builder>
           
-          <a href="https://randomusernametosave.github.io/VOSP-GUIDE">
+          <a href="https://randomusernametosave.github.io/VOSP-GUIDE" target="_blank" rel="noopener noreferrer">
             <Button variant="ghost" size="icon" class="{currentPage === '/Data' ? 'bg-secondary' : ''} rounded-lg" aria-label="Models" builders={[builder]}>
               <Book class="size-5" />
             </Button>
           </a>
         </Tooltip.Trigger>
         <Tooltip.Content side="right" sideOffset={5}>Documentation</Tooltip.Content>
-      </Tooltip.Root>
-    </nav>
-  
-    <nav class="mt-auto grid gap-1 p-2">
-      <Tooltip.Root>
-        <Tooltip.Trigger asChild let:builder>
-          <Button variant="ghost" size="icon" class="mt-auto rounded-lg" aria-label="Help" builders={[builder]}>
-            <LifeBuoy class="size-5" />
-          </Button>
-        </Tooltip.Trigger>
-        <Tooltip.Content side="right" sideOffset={5}>Help</Tooltip.Content>
-      </Tooltip.Root>
-  
-      <Tooltip.Root>
-        <Tooltip.Trigger asChild let:builder>
-          <Button variant="ghost" size="icon" class="mt-auto rounded-lg" aria-label="Account" builders={[builder]}>
-            <SquareUser class="size-5" />
-          </Button>
-        </Tooltip.Trigger>
-        <Tooltip.Content side="right" sideOffset={5}>Account</Tooltip.Content>
       </Tooltip.Root>
     </nav>
   </aside>

@@ -72,7 +72,6 @@ pub fn x_advection(element:&mut Element,DT:f64) {
             v1 = -element.lv + ( iv as f64)*element.dv;
             
             calc_ind = ix as isize- (v1*DT*element.config.dxi ).ceil() as isize;
-            //calc_ind -= 1;
             th = ((v1*DT*element.config.dxi).ceil() as isize) as f64 - v1*DT*element.config.dxi;
 
             if calc_ind <= 2 {
@@ -109,8 +108,8 @@ pub fn v_advection(element:&mut Element,DT:f64, elec_field: &Vec<f64>) {
         for iv  in 2..element.config.NV+2 {
 
             v1 = -( element.z_charge as f64) *elec_field[ix]/element.mu;
+
             calc_ind = iv as isize- (v1*DT*element.dv ).ceil() as isize;
-            //calc_ind -= 1;
             th = ((v1*DT*element.dv).ceil() as isize) as f64 - v1*DT*element.dv;
 
             if calc_ind <= 2 {
